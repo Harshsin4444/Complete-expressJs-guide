@@ -1,23 +1,21 @@
 const express = require('express');
+
+
 const bodyParser = require('body-parser');
 
 const app = express();
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({extended:false}));
 
-app.use('/add-product',(req,res,next)=>{
-    res.send('<form action="/product" method="POST"><input type="text" name="title"><input type="number" name="size"><button type="submit">SEND</button></form>');
 
-})
+app.use('/admin',adminRoutes);
 
-app.post('/product',(req,res,next)=>{
-    console.log(req.body);
-    res.redirect('/');
-})
+app.use('/shop',shopRoutes);
 
-app.use('/',(req,res,next)=>{
-    console.log('in the middleware');
-    res.send('<h1>HELLO WORLD</h1>');
+app.use((req,res,next)=>{
+    res.status(404).send('<h1> Page Not Found</h1>');
 })
 
 
