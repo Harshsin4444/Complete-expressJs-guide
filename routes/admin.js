@@ -9,6 +9,14 @@ router.get('/add-product',(req,res,next)=>{
 
 })
 
+router.get('/contactus',(req,res,next)=>{
+    res.sendFile(path.join(rootDir,'views','contact-us.html'))
+})
+
+router.post('/success',(req,res,next)=>{
+    res.sendFile(path.join(rootDir,'views','success.html'))
+})
+
 router.post('/add-product',(req,res,next)=>{
     console.log(req.body);
     res.redirect('/');
